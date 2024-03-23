@@ -1,4 +1,4 @@
-CMD:=example-telegram-bot
+CMD:=armenian-blackouts-bot
 PKG_LIST:=$(shell go list -f '{{.Dir}}' ./...)
 GIT_HASH?=$(shell git log --format="%h" -n 1 2> /dev/null)
 GIT_BRANCH?=$(shell git branch 2> /dev/null | grep '*' | cut -f2 -d' ')

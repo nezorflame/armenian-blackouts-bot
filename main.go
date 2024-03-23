@@ -9,9 +9,9 @@ import (
 	"os/signal"
 	"syscall"
 
-	"github.com/nezorflame/example-telegram-bot/internal/bolt"
-	"github.com/nezorflame/example-telegram-bot/internal/bot"
-	"github.com/nezorflame/example-telegram-bot/internal/config"
+	"github.com/nezorflame/armenian-blackouts-bot/internal/bolt"
+	"github.com/nezorflame/armenian-blackouts-bot/internal/bot"
+	"github.com/nezorflame/armenian-blackouts-bot/internal/config"
 )
 
 // Config flags.

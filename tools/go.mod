@@ -1,4 +1,4 @@
-module github.com/nezorflame/example-telegram-bot/tools
+module github.com/nezorflame/armenian-blackouts-bot/tools
 
 go 1.22
 

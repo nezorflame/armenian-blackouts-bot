@@ -1,18 +1,10 @@
-# example-telegram-bot [![Workflow status](https://github.com/nezorflame/example-telegram-bot/actions/workflows/go.yml/badge.svg)](https://github.com/nezorflame/example-telegram-bot/actions/workflows/go.yml) [![Go Report Card](https://goreportcard.com/badge/github.com/nezorflame/example-telegram-bot)](https://goreportcard.com/report/github.com/nezorflame/example-telegram-bot) [![GolangCI](https://golangci.com/badges/github.com/nezorflame/example-telegram-bot.svg)](https://golangci.com/r/github.com/nezorflame/example-telegram-bot) [![FOSSA license check](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fnezorflame%2Fexample-telegram-bot.svg?type=shield&issueType=license)](https://app.fossa.com/projects/git%2Bgithub.com%2Fnezorflame%2Fexample-telegram-bot?ref=badge_shield&issueType=license) [![FOSSA security check](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fnezorflame%2Fexample-telegram-bot.svg?type=shield&issueType=security)](https://app.fossa.com/projects/git%2Bgithub.com%2Fnezorflame%2Fexample-telegram-bot?ref=badge_shield&issueType=security)
+# armenian-blackouts-bot [![Workflow status](https://github.com/nezorflame/armenian-blackouts-bot/actions/workflows/go.yml/badge.svg)](https://github.com/nezorflame/armenian-blackouts-bot/actions/workflows/go.yml) [![Go Report Card](https://goreportcard.com/badge/github.com/nezorflame/armenian-blackouts-bot)](https://goreportcard.com/report/github.com/nezorflame/armenian-blackouts-bot) [![GolangCI](https://golangci.com/badges/github.com/nezorflame/armenian-blackouts-bot.svg)](https://golangci.com/r/github.com/nezorflame/armenian-blackouts-bot)
 
-Example bot template for Telegram.
+Bot which allows you to be notified about the utilities' blackouts in Armenia.
 
 ## Description
 
-With this type of setup all you need to do is:
-
-- create a project from the template and `git clone` it
-- replace the module and bot name to your own
-- run `make init` to set up the project and its dependencies
-- add required code
-- set up the environment or your `.env` file for your needs
-- modify `.service` file for systemd to manage your bot
-- deploy your bot to the server of choice!
+TODO
 
 ## Dependencies
 
@@ -33,14 +25,3 @@ This project mostly adheres to the [Project Layout](https://github.com/golang-st
 - `bolt` for database (using BoltDB)
 - `file` for file and network helpers
 - `telegram` package with bot implementation
-
-## Customization
-
-To add another custom command handler, you can:
-
-- add a command to `.env` file (and also a corresponding message, if required)
-- edit `internal` packages
-
-## License
-
-[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fnezorflame%2Fexample-telegram-bot.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fnezorflame%2Fexample-telegram-bot?ref=badge_large)

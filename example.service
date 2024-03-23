@@ -1,0 +1,19 @@
+[Unit]
+Description=Bot which allows you to be notified about the utilities' blackouts in Armenia
+ConditionPathExists=/gopath/bin/armenian-blackouts-bot
+After=network.target
+
+[Service]
+Type=simple
+User=youruser
+Group=youruser
+LimitNOFILE=1024
+
+Restart=on-failure
+RestartSec=10
+
+WorkingDirectory=/gopath/bin/
+ExecStart=/gopath/bin/armenian-blackouts-bot --env=/etc/armenian-blackouts-bot.env --log-level=INFO
+
+[Install]
+WantedBy=multi-user.target

@@ -16,8 +16,9 @@ type Config struct {
 	DBPath    string        `required:"true" split_words:"true" default:"./bolt.db"`
 	DBTimeout time.Duration `required:"true" split_words:"true" default:"1s"`
 
-	CmdStart string `required:"true" split_words:"true"`
-	CmdHelp  string `required:"true" split_words:"true"`
+	CmdStart     string `required:"true" split_words:"true"`
+	CmdHelp      string `required:"true" split_words:"true"`
+	CmdSubscribe string `required:"true" split_words:"true"`
 
 	MsgHello      string `required:"true" split_words:"true"`
 	MsgHelp       string `required:"true" split_words:"true"`

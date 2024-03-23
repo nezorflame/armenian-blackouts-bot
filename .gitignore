@@ -21,5 +21,6 @@ go.work.sum
 bin/
 __debug_bin*
 .env
+armenian-blackouts-bot.service
 *.db
 .DS_Store

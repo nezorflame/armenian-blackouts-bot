@@ -8,8 +8,8 @@ import (
 
 	tele "gopkg.in/telebot.v3"
 
-	"github.com/nezorflame/example-telegram-bot/internal/bolt"
-	"github.com/nezorflame/example-telegram-bot/internal/config"
+	"github.com/nezorflame/armenian-blackouts-bot/internal/bolt"
+	"github.com/nezorflame/armenian-blackouts-bot/internal/config"
 )
 
 type bot struct {
@@ -52,6 +52,9 @@ func New(cfg *config.Config, log *slog.Logger, db *bolt.DB) (*bot, error) {
 	b.tg.Handle(cfg.CmdHelp, func(teleCtx tele.Context) error {
 		return b.help(teleCtx)
 	})
+	b.tg.Handle(cfg.CmdSubscribe, func(teleCtx tele.Context) error {
+		return b.subscribe(teleCtx)
+	})
 	b.tg.Handle(tele.OnText, func(teleCtx tele.Context) error {
 		return b.handle(teleCtx)
 	})
@@ -79,6 +82,31 @@ func (b *bot) hello(teleCtx tele.Context) error {
 func (b *bot) help(teleCtx tele.Context) error {
 	b.log.With("chat_id", teleCtx.Chat().ID, "msg_id", teleCtx.Message().ID).Debug("Sending help reply")
 	return teleCtx.Send(b.cfg.MsgHelp)
+}
+
+func (b *bot) subscribe(teleCtx tele.Context) error {
+	log := b.log.With("chat_id", teleCtx.Chat().ID, "msg_id", teleCtx.Message().ID)
+	log.Debug("Got the subscribe command")
+
+	argText, _ := strings.CutPrefix(teleCtx.Message().Text, b.cfg.CmdSubscribe)
+	argText = strings.TrimSpace(argText)
+	log.Debug("Subscribe details:", "args", argText)
+
+	// split args by spaces
+	// first arg should be channel username
+	// others - words string to follow
+	args := strings.Split(argText, " ")
+	if len(args) < 2 {
+		return errors.New("not enough arguments")
+	}
+
+	chat, err := b.tg.ChatByUsername(args[0])
+	if err != nil {
+		return fmt.Errorf("unable to get chat by username '%s': %w", args[0], err)
+	}
+	log.Debug(chat.Description)
+
+	return nil
 }
 
 func (b *bot) handle(teleCtx tele.Context) error {
