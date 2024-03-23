@@ -1,0 +1,122 @@
+# More info on config here: https://github.com/golangci/golangci-lint#config-file
+run:
+  timeout: 10m
+  issues-exit-code: 1
+  tests: true
+
+output:
+  formats:
+    - format: json
+      path: stderr
+    - format: checkstyle
+      path: report.xml
+    - format: colored-line-number
+  print-issued-lines: true
+  print-linter-name: true
+
+linters-settings:
+  gocritic:
+    disabled-checks:
+      - exitAfterDefer
+  goconst:
+    min-len: 2
+    min-occurrences: 2
+  revive:
+    rules:
+      # https://github.com/mgechev/revive/blob/master/RULES_DESCRIPTIONS.md#var-naming
+      - name: var-naming
+        disabled: true
+  gomodguard:
+    blocked:
+      modules:
+        - github.com/pkg/errors:
+            recommendations:
+              - errors
+            reason: "`errors` is the official error helper library."
+        - github.com/go-errors/errors:
+            recommendations:
+              - errors
+            reason: "`errors` is the official error helper library."
+      local_replace_directives: true
+
+  gci:
+    sections:
+      - standard # Standard section: captures all standard packages.
+      - default # Default section: contains all imports that could not be matched to another section type.
+      - prefix(github.com/nezorflame/example-telegram-bot) # Custom section: groups all imports with the specified Prefix.
+      # - blank # Blank section: contains all blank imports. This section is not present unless explicitly enabled.
+      # - dot # Dot section: contains all dot imports. This section is not present unless explicitly enabled.
+    skip-generated: false
+    custom-order: true
+  gofumpt:
+    module-path: github.com/nezorflame/example-telegram-bot
+    extra-rules: true
+
+linters:
+  disable-all: true
+  enable:
+    - errcheck
+    - errorlint
+    - gocheckcompilerdirectives
+    - goconst
+    - gocritic
+    - gomodguard
+    - gosec
+    - gosimple
+    - govet
+    - ineffassign
+    - makezero
+    - nilnil
+    - nolintlint
+    - revive
+    - staticcheck
+    - tenv
+    - thelper
+    - tparallel
+    - typecheck
+    - unconvert
+    - unused
+    - usestdlibvars
+    - wastedassign
+    - gci # autofixable
+    - gofumpt # autofixable
+    - misspell # autofixable
+    - whitespace # autofixable
+    # - godox # enable before pushing to avoid TODOs
+
+issues:
+  # Which dirs to exclude: issues from them won't be reported.
+  # Can use regexp here: `generated.*`, regexp is applied on full path,
+  # including the path prefix if one is set.
+  # Default dirs are skipped independently of this option's value (see exclude-dirs-use-default).
+  # "/" will be replaced by current OS file path separator to properly work on Windows.
+  # Default: []
+  exclude-dirs:
+    - bin
+    - vendor
+    - var
+    - tmp
+    - internal/generated
+  # List of regexps of issue texts to exclude, empty list by default.
+  # But independently from this option we use default exclude patterns,
+  # it can be disabled by `exclude-use-default: false`. To list all
+  # excluded by default patterns execute `golangci-lint run --help`
+  exclude:
+    # error shadowing is mostly OK
+    - 'shadow: declaration of "err"'
+  # Excluding configuration per-path, per-linter, per-text and per-source
+  exclude-rules:
+    # Exclude some linters from running on tests files.
+    - path: test/.*\.go
+      linters:
+        - gocyclo
+        - errcheck
+        - dupl
+        - gosec
+    - path: _test\.go
+      linters:
+        - gocyclo
+        - errcheck
+        - dupl
+        - gosec
+        - govet
